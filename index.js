@@ -49,6 +49,7 @@ async function run() {
 
 
 
+    //? delete an inventory item
     app.delete('/inventory/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id)};
@@ -58,7 +59,7 @@ async function run() {
 
 
 
-  
+  //? update stock of inventory ite
   app.put('/inventory/:id', async (req, res) => {
     const id = req.params.id;
     const quantity = req.body.quantity;
@@ -76,7 +77,7 @@ async function run() {
 
   }
   finally {
-
+      //// client.close();
   }
 }
 
