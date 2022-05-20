@@ -88,6 +88,9 @@ run().catch(console.dir);
 app.get('/', (req, res) => {
     res.send('Server site')
   });
+app.get('/server', (req, res) => {
+    res.send('test')
+  });
   
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
