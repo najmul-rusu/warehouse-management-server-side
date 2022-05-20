@@ -14,15 +14,14 @@ app.use(express.json());
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster-01.x4mie.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+//? Server Stablish
 async function run() {
   try {
       await client.connect();
 
       const inventoryCollection = client.db('mobilewarehouse').collection('items');
 
-
-
-
+      //? get all inventory item
       app.get('/inventory', async (req, res) => {
           const query = {};
           const cursor = inventoryCollection.find(query);
@@ -32,7 +31,7 @@ async function run() {
 
 
 
-
+      //? get inventory item by id
       app.get('/inventory/:id', async (req, res) => {
           const id = req.params.id;
           const query = { _id: ObjectId(id) };
@@ -41,7 +40,7 @@ async function run() {
       })
 
 
-
+      //? add inventory item
       app.post('/additem', async (req, res) => {
         const newitem = req.body;
         const result = await inventoryCollection.insertOne(newitem);
